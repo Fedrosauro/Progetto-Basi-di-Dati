@@ -1,0 +1,35 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+button, select{
+  font-family: 'Roboto', sans-serif;
+}
+
+.hidden{
+  display: none;
+}
+
+.table_content{
+  display: flex;
+  height: 0;
+  margin-left: 15px;
+}
+
+table{
+  border-collapse: collapse;
+  text-align: center;
+
+}
+
+th{
+  border: 1px solid black;
+  padding: 5px;
+  background-color: gray;
+  color: white;
+}
+
+td{
+  border: 1px solid black;
+  padding: 2px;
+}

@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+include 'config.php';
 try{
     $connection = new PDO("mysql:host=$host;dbname=$db",$user,$password);
     echo "Connessione al MySQL tramite PDO effettuata"."<br><br>";

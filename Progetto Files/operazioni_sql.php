@@ -24,7 +24,7 @@ try{
     <h4>Stored Procedure : fermate di un treno</h4>
     <p>A seconda della denominazione del treno scelto, questa procedura
     darà come risultato le possibili corse che il suddetto treno cercato farà
-    Inserimento denominazione treno :</p>
+    Inserimento denominazione treno :
     <select id="selezione">
       <option value="Regionale_3444">Regionale 3444</option>
       <option value="Regionale_3562">Regionale 3562</option>

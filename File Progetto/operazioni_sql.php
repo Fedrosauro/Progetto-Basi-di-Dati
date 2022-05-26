@@ -22,7 +22,7 @@ try{
     </div>
 
     <h4>Stored Procedure : fermate di un treno</h4>
-    <p>A seconda della denominazione del treno scelto, questa procedura
+    <p><span class="orange">>> </span>A seconda della denominazione del treno scelto, questa procedura
     darà come risultato le possibili corse che il suddetto treno cercato farà
     Inserimento denominazione treno :
     <select id="selezione">
@@ -83,7 +83,7 @@ try{
     </div>
 
     <h4>Stored Procedure : numero posti di un treno</h4>
-    <p>Stampa una tabella con il numero totale di posti disponibili all'interno di ogni treno</p>
+    <p><span class="orange">>> </span>Stampa una tabella con il numero totale di posti disponibili all'interno di ogni treno
     <div class="table_content">
       <div>
         <table>
@@ -125,9 +125,9 @@ try{
     </div>
 
     <h4>Stored Procedure : vendita biglietti mensile</h4>
-    <p>Viene stampata una tabella con il numero di biglietti venduti raggruppati per giorno per il mese selezionato.
+    <p><span class="orange">>> </span>Viene stampata una tabella con il numero di biglietti venduti raggruppati per giorno per il mese selezionato.
     Siccome sono stati inseriti solo biglietti venduti nel mese di maggio (5), la Stored Procedure verra'
-    direttamente eseguita con il numero 5</p>
+    direttamente eseguita con il numero 5
     <div class="table_content">
       <div>
         <table>
@@ -168,8 +168,8 @@ try{
     </div>
 
     <h4>Stored Procedure : lista delle stazioni piu' trafficate</h4>
-    <p>Viene stampata una tabella con la lista delle stazioni piu' trafficate. Per stazioni trafficate
-    si intende le stazioni dove arrivano piu' persone :</p>
+    <p><span class="orange">>> </span>Viene stampata una tabella con la lista delle stazioni piu' trafficate. Per stazioni trafficate
+    si intende le stazioni dove arrivano piu' persone :
     <div class="table_content">
       <div>
         <table>
@@ -211,9 +211,9 @@ try{
     </div>
 
     <h4>Stored Procedure : trova treno</h4>
-    <p>Per i dati immessi nelle tabelle e per semplificare tutto il processo di esposizione
+    <p><span class="orange">>> </span>Per i dati immessi nelle tabelle e per semplificare tutto il processo di esposizione
     si suppone che l'utente come stazione di partenza metta "Trieste Centrale" e invece come
-    stazione di arrivo metta "Stazione di Monfalcone e che l'orario sia 15:00 . Facendo ciò si otterrebbe il seguente risultato :</p>
+    stazione di arrivo metta "Stazione di Monfalcone e che l'orario sia 15:00 . Facendo ciò si otterrebbe il seguente risultato :"
     <div class="table_content">
       <div>
         <table>
@@ -258,15 +258,13 @@ try{
     </div>
 
     <h4>Stored Procedure : stampa riepilogo</h4>
-    <p>Purtroppo questa procedura per motivi a me adesso ignoti non sono riuscito a farla
+    <p><span class="orange">>> </span>Purtroppo questa procedura per motivi a me adesso ignoti non sono riuscito a farla
       funzionare. In ogni caso l'output della procedura per stampare per esempio il riepilogo
-      biglietto comprato da Emma Ferri sarebbe stato: <br><br>
+      biglietto comprato da Emma Ferri sarebbe stato:</p>
 
-      Emma Ferri. Costo biglietto : 23.45 euro. Data Viaggio :2022-05-22  |
+      <p class="color_back">Emma Ferri. Costo biglietto : 23.45 euro. Data Viaggio :2022-05-22  |
       Regionale 3562, Trieste Centrale -> 15:16, Venezia Mestre -> 17:11 |
       Regionale 3985, Venezia Mestre -> 17:53, S. Pietro In Casale -> 19:30</p>
-
-
 
     <?php
       }catch (PDOException $e){

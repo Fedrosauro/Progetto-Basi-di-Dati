@@ -20,7 +20,7 @@ try{
     <div class="center">
     <a href="index.php?v=<?php $version ?>" class="redLink" >RITORNA ALLA PAGINA INIZIALE</a> <br><br>
 
-    <p style="margin: auto;">Selezionare la tabella interessata</p> <br>
+    <p style="margin: auto;"><span class="orange">>> </span>Selezionare la tabella interessata<span class="orange"> <<</span></p> <br>
     <select id="selezione">
       <option value="acquisto_biglietto">acquisto_biglietto</option>
       <option value="associazione_biglietto_corsa">associazione_biglietto_corsa</option>

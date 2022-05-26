@@ -24,7 +24,7 @@ try{
     <h4>Stored Procedure : fermate di un treno</h4>
     <p>A seconda della denominazione del treno scelto, questa procedura
     darà come risultato le possibili corse che il suddetto treno cercato farà
-    Inserimento denominazione treno :
+    Inserimento denominazione treno :</p>
     <select id="selezione">
       <option value="Regionale_3444">Regionale 3444</option>
       <option value="Regionale_3562">Regionale 3562</option>
@@ -83,7 +83,7 @@ try{
     </div>
 
     <h4>Stored Procedure : numero posti di un treno</h4>
-    <p>Stampa una tabella con il numero totale di posti disponibili all'interno di ogni treno
+    <p>Stampa una tabella con il numero totale di posti disponibili all'interno di ogni treno</p>
     <div class="table_content">
       <div>
         <table>
@@ -127,7 +127,7 @@ try{
     <h4>Stored Procedure : vendita biglietti mensile</h4>
     <p>Viene stampata una tabella con il numero di biglietti venduti raggruppati per giorno per il mese selezionato.
     Siccome sono stati inseriti solo biglietti venduti nel mese di maggio (5), la Stored Procedure verra'
-    direttamente eseguita con il numero 5
+    direttamente eseguita con il numero 5</p>
     <div class="table_content">
       <div>
         <table>
@@ -169,7 +169,7 @@ try{
 
     <h4>Stored Procedure : lista delle stazioni piu' trafficate</h4>
     <p>Viene stampata una tabella con la lista delle stazioni piu' trafficate. Per stazioni trafficate
-    si intende le stazioni dove arrivano piu' persone :
+    si intende le stazioni dove arrivano piu' persone :</p>
     <div class="table_content">
       <div>
         <table>
@@ -213,7 +213,7 @@ try{
     <h4>Stored Procedure : trova treno</h4>
     <p>Per i dati immessi nelle tabelle e per semplificare tutto il processo di esposizione
     si suppone che l'utente come stazione di partenza metta "Trieste Centrale" e invece come
-    stazione di arrivo metta "Stazione di Monfalcone e che l'orario sia 15:00 . Facendo ciò si otterrebbe il seguente risultato :"
+    stazione di arrivo metta "Stazione di Monfalcone e che l'orario sia 15:00 . Facendo ciò si otterrebbe il seguente risultato :</p>
     <div class="table_content">
       <div>
         <table>
@@ -264,7 +264,7 @@ try{
 
       Emma Ferri. Costo biglietto : 23.45 euro. Data Viaggio :2022-05-22  |
       Regionale 3562, Trieste Centrale -> 15:16, Venezia Mestre -> 17:11 |
-      Regionale 3985, Venezia Mestre -> 17:53, S. Pietro In Casale -> 19:30
+      Regionale 3985, Venezia Mestre -> 17:53, S. Pietro In Casale -> 19:30</p>
 
 
 

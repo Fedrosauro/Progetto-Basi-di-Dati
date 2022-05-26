@@ -1,9 +1,16 @@
 body{
-  font-family: 'Roboto', sans-serif;
+  color: #FCFCFC;
+  font-family: 'JetBrains Mono', monospace;  background-color: #011627;
+  margin: 20px;
+  font-size: 15px;
 }
 
 button, select{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'JetBrains Mono', monospace;  background-color: #011627;
+}
+
+.center {
+  text-align: center;
 }
 
 .hidden{
@@ -11,25 +18,76 @@ button, select{
 }
 
 .table_content{
+  margin-top: 20px;
   display: flex;
-  height: 0;
-  margin-left: 15px;
 }
 
 table{
   border-collapse: collapse;
+  border-radius: 0.5em;
+  overflow: hidden;
   text-align: center;
-
+  margin-right: 15px;
 }
 
 th{
-  border: 1px solid black;
   padding: 5px;
-  background-color: gray;
+  background-color: #7E7F83;
   color: white;
 }
 
 td{
-  border: 1px solid black;
   padding: 2px;
+  background-color: #FCFCFC;
+  border-top: 2px solid black;
+  color: black;
+}
+
+button {
+  background-color: #011627;
+  color: #FCFCFC;
+  border: 2px solid #FCFCFC;
+  padding: 5.5px;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  border-radius: 10px;
+}
+
+button:hover{
+  background-color: #FCFCFC;
+  color: #011627;
+}
+
+select{
+  background-color: #011627;
+  color: #FCFCFC;
+  border: 2px solid #FCFCFC;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+
+.redLink{
+  color: #FF6978;
+}
+
+.redLink:link{
+  text-decoration: none;
+  border: 2px solid;
+  padding: 5.5px;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+
+.redLink:hover{
+  color: #FCFCFC;
+}
+
+p{
+  background-color: #182F42;
+  width: fit-content;
+  border: 5px solid #182F42;
+  border-radius: 20px;
+  padding: 10px;
 }

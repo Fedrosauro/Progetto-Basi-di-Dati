@@ -12,16 +12,18 @@ try{
     <link rel="stylesheet" href="style.css?v=<?php $version ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
     <script type="text/javascript" src="javascript.js?v=<?php $version ?>"></script>
   </head>
 
   <body>
-    <a href="index.php?v=<?php $version ?>">RITORNA ALLA PAGINA INIZIALE</a>
+    <div class="center">
+      <a href="index.php?v=<?php $version ?>" class="redLink">RITORNA ALLA PAGINA INIZIALE</a>
+    </div>
 
     <h4>Stored Procedure : fermate di un treno</h4>
     <p>A seconda della denominazione del treno scelto, questa procedura
-    darà come risultato le possibili corse che il suddetto treno cercato farà : <br>
+    darà come risultato le possibili corse che il suddetto treno cercato farà
     Inserimento denominazione treno :
     <select id="selezione">
       <option value="Regionale_3444">Regionale 3444</option>
@@ -44,7 +46,11 @@ try{
           <table id="<?php echo $train_chosen ?>" class="hidden">
             <tr>
               <?php
-                $sql = "CALL fermate_treno(?)";
+                $sql = "SELECT CONCAT(nome_stazione, ' (', SUBSTRING(ora_a, 1, 5), ')') as
+                Stazione_Arrivo_Ora
+                FROM corsa c INNER JOIN stazione s on c.id_stazione_a = s.id_stazione
+                WHERE id_treno = (SELECT id_treno FROM treno WHERE denominazione = ?)
+                ORDER BY ora_a";
                 $prepared = $connection->prepare($sql);
                 $prepared->execute(array($train_chosen));
 
@@ -83,7 +89,11 @@ try{
         <table>
           <tr>
             <?php
-              $sql = "CALL num_posti_treni()";
+              $sql = "SELECT denominazione, t.id_treno, SUM(num_posti) AS posti_Totali FROM treno t
+              INNER JOIN composizione_treno ct on t.id_treno = ct.id_treno
+              INNER JOIN vagone v on ct.id_vagone = v.id_vagone
+              INNER JOIN tipologia tp on v.tipo = tp.tipo
+              GROUP BY t.id_treno ORDER BY posti_Totali";
               $prepared = $connection->prepare($sql);
               $prepared->execute();
 
@@ -115,16 +125,18 @@ try{
     </div>
 
     <h4>Stored Procedure : vendita biglietti mensile</h4>
-    <p>Viene stampata una tabella con il numero di biglietti venduti raggruppati per giorno per il mese selezionato.<br>
-    Siccome sono stati inseriti solo biglietti venduti nel mese di maggio (5), la Stored Procedure verra' <br>
+    <p>Viene stampata una tabella con il numero di biglietti venduti raggruppati per giorno per il mese selezionato.
+    Siccome sono stati inseriti solo biglietti venduti nel mese di maggio (5), la Stored Procedure verra'
     direttamente eseguita con il numero 5
     <div class="table_content">
       <div>
         <table>
           <tr>
             <?php
-              $sql = "CALL vendita_biglietti_mensile(?);";
-              $mese = 5;
+              $sql = "SELECT data_acquisto AS giorno, COUNT(*) AS num_Biglietti FROM acquisto_biglietto
+              WHERE MONTH(data_acquisto) = ?
+              GROUP BY data_acquisto ORDER BY data_acquisto";
+              $mese = "5";
               $prepared = $connection->prepare($sql);
               $prepared->execute(array($mese));
 
@@ -156,14 +168,18 @@ try{
     </div>
 
     <h4>Stored Procedure : lista delle stazioni piu' trafficate</h4>
-    <p>Viene stampata una tabella con la lista delle stazioni piu' trafficate. Per stazioni trafficate <br>
+    <p>Viene stampata una tabella con la lista delle stazioni piu' trafficate. Per stazioni trafficate
     si intende le stazioni dove arrivano piu' persone :
     <div class="table_content">
       <div>
         <table>
           <tr>
             <?php
-              $sql = "CALL lista_stazioni_trafficate();";
+              $sql = "SELECT nome_stazione, COUNT(*) as traffico_persone FROM acquisto_biglietto
+              INNER JOIN biglietto USING (id_biglietto)INNER JOIN associazione_biglietto_corsa USING (id_biglietto)
+              INNER JOIN corsa USING (id_corsa)
+              INNER JOIN stazione s on (corsa.id_stazione_a = s.id_stazione)
+              GROUP BY id_stazione_a ORDER BY traffico_persone DESC";
               $prepared = $connection->prepare($sql);
               $prepared->execute();
 
@@ -195,8 +211,8 @@ try{
     </div>
 
     <h4>Stored Procedure : trova treno</h4>
-    <p>Per i dati immessi nelle tabelle e per semplificare tutto il processo di esposizione<br>
-    si suppone che l'utente come stazione di partenza metta "Trieste Centrale" e invece come<br>
+    <p>Per i dati immessi nelle tabelle e per semplificare tutto il processo di esposizione
+    si suppone che l'utente come stazione di partenza metta "Trieste Centrale" e invece come
     stazione di arrivo metta "Stazione di Monfalcone e che l'orario sia 15:00 . Facendo ciò si otterrebbe il seguente risultato :"
     <div class="table_content">
       <div>
@@ -206,7 +222,11 @@ try{
               $id_staz_a = "llxa2";
               $id_staz_p = "9o55i";
               $time = "15:00";
-              $sql = "CALL trova_treno(?, ?, ?);";
+              $sql = "SELECT denominazione AS treno, SUBSTRING(c.ora_p, 1, 5) AS ora_partenza,
+              SUBSTRING(c.ora_a, 1, 5) AS ora_arrivo FROM corsa c
+              INNER JOIN treno t on c.id_treno = t.id_treno
+              WHERE id_stazione_a = ? AND id_stazione_p = ? AND ora_p > ?
+              ORDER BY c.ora_p";
               $prepared = $connection->prepare($sql);
               $prepared->execute(array($id_staz_a, $id_staz_p, $time));
 
@@ -238,9 +258,13 @@ try{
     </div>
 
     <h4>Stored Procedure : stampa riepilogo</h4>
-    <p>Supponendo di voler avere il riepilogo del biglietto di Emma	Ferri per il suo viaggio <br>
-    a S. Pietro In Casale si ottiene il seguente risultato :
+    <p>Purtroppo questa procedura per motivi a me adesso ignoti non sono riuscito a farla
+      funzionare. In ogni caso l'output della procedura per stampare per esempio il riepilogo
+      biglietto comprato da Emma Ferri sarebbe stato: <br><br>
 
+      Emma Ferri. Costo biglietto : 23.45 euro. Data Viaggio :2022-05-22  |
+      Regionale 3562, Trieste Centrale -> 15:16, Venezia Mestre -> 17:11 |
+      Regionale 3985, Venezia Mestre -> 17:53, S. Pietro In Casale -> 19:30
 
 
 

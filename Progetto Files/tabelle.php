@@ -2,7 +2,6 @@
 include 'config.php';
 try{
     $connection = new PDO("mysql:host=$host;dbname=$db",$user,$password);
-    echo "Connessione al MySQL tramite PDO effettuata"."<br><br>";
 ?>
 
 <!DOCTYPE html>
@@ -13,14 +12,15 @@ try{
     <link rel="stylesheet" href="style.css?v=<?php $version ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
     <script type="text/javascript" src="javascript.js?v=<?php $version ?>"></script>
   </head>
 
   <body>
-    <a href="index.php?v=<?php $version ?>">RITORNA ALLA PAGINA INIZIALE</a> <br><br>
+    <div class="center">
+    <a href="index.php?v=<?php $version ?>" class="redLink" >RITORNA ALLA PAGINA INIZIALE</a> <br><br>
 
-    <p>Selezionare la tabella interessata</p>
+    <p style="margin: auto;">Selezionare la tabella interessata</p> <br>
     <select id="selezione">
       <option value="acquisto_biglietto">acquisto_biglietto</option>
       <option value="associazione_biglietto_corsa">associazione_biglietto_corsa</option>
@@ -34,8 +34,9 @@ try{
       <option value="treno">treno</option>
       <option value="vagone">vagone</option>
     </select>
-    <button type="button" id="button" onclick="toggleEvent()">Mostra/Nascondi tabella</button>
-
+    <button type="button" onclick="toggleEvent()">Mostra/Nascondi tabella</button>
+  </div>
+    <div class="table_content">
       <?php
         for ($j=0; $j < 11; $j++) {
           switch ($j) {
@@ -51,38 +52,39 @@ try{
             case "9": { $table_chosen = "treno"; break; }
             case "10": { $table_chosen = "vagone"; break; }
           } ?>
-        <div class="table_content">
-        <table id="<?php echo $table_chosen ?>" class="hidden">
-          <tr>
-            <?php
-              $sql = "SELECT * FROM $table_chosen";
-              $prepared = $connection->prepare($sql);
-              $prepared->execute();
+        <div>
+          <table id="<?php echo $table_chosen ?>" class="hidden">
+            <tr>
+              <?php
+                $sql = "SELECT * FROM $table_chosen";
+                $prepared = $connection->prepare($sql);
+                $prepared->execute();
 
-              if($prepared->rowCount() > 0){
-        				$ris = $prepared->fetchAll();
-              }
-              for ($i=0; $i < $prepared->columnCount(); $i++) {
-                $col = $prepared->getColumnMeta($i); ?>
-                <th><?php echo $col["name"]; ?></th>
+                if($prepared->rowCount() > 0){
+          				$ris = $prepared->fetchAll();
+                }
+                for ($i=0; $i < $prepared->columnCount(); $i++) {
+                  $col = $prepared->getColumnMeta($i); ?>
+                  <th><?php echo $col["name"]; ?></th>
+                <?php
+                }
+              ?>
+            </tr>
+
+            <?php
+              foreach($ris as $row){ ?>
+                <tr> <?php
+                for ($i=0; $i < $prepared->columnCount(); $i++) {
+                  $col = $prepared->getColumnMeta($i); ?>
+                  <td> <?php echo $row[$col["name"]]; ?></td>
+                <?php
+                } ?>
+                </tr>
               <?php
               }
             ?>
-          </tr>
-
-          <?php
-            foreach($ris as $row){ ?>
-              <tr> <?php
-              for ($i=0; $i < $prepared->columnCount(); $i++) {
-                $col = $prepared->getColumnMeta($i); ?>
-                <td> <?php echo $row[$col["name"]]; ?></td>
-              <?php
-              } ?>
-              </tr>
-            <?php
-            }
-          ?>
-        </table>
+          </table>
+        </div>
         <?php }
           }catch (PDOException $e){
             die("Errore di connessione al database".$e->getMessage());

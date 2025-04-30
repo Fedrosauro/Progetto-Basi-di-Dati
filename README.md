@@ -6,4 +6,4 @@ Il Sito Web è composto da 3 pagine : **Homepage**, **Operazioni SQL**, e **Tabe
 
 *Osservazione* : l'Host Provider (Infinity Free) per gli account non premium non consente di utilizzare Stored Procedures e Triggers. A causa di ciò, nel codice PHP sono state usate delle query normali per fare le operazioni sql.
 
-Link al sito → [GestioneFerroviariaR&F](https://regionaliandfrecceprogettobdd.epizy.com/)
+Link al sito → [GestioneFerroviariaR&F](https://regionaliandfrecceprogettobdd.epizy.com/) (not working anymore)
